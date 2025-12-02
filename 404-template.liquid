@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>We're Building Something Big</title>
+    <style>
+        :root {
+            --color-white: rgba(255, 255, 255, 1);
+            --color-black: rgba(0, 0, 0, 1);
+            --color-cream-50: rgba(252, 252, 249, 1);
+            --color-cream-100: rgba(255, 255, 253, 1);
+            --color-gray-200: rgba(245, 245, 245, 1);
+            --color-gray-300: rgba(167, 169, 169, 1);
+            --color-slate-500: rgba(98, 108, 113, 1);
+            --color-brown-600: rgba(94, 82, 64, 1);
+            --color-slate-900: rgba(19, 52, 59, 1);
+            --color-teal-300: rgba(50, 184, 198, 1);
+            --color-teal-500: rgba(33, 128, 141, 1);
+            --color-teal-600: rgba(29, 116, 128, 1);
+            --color-teal-700: rgba(26, 104, 115, 1);
+            --color-charcoal-700: rgba(31, 33, 33, 1);
+            --color-charcoal-800: rgba(38, 40, 40, 1);
+            --color-brown-600-rgb: 94, 82, 64;
+            --color-teal-500-rgb: 33, 128, 141;
+            --color-gray-400-rgb: 119, 124, 124;
+            --color-success-rgb: 33, 128, 141;
+            
+            --color-background: var(--color-cream-50);
+            --color-surface: var(--color-cream-100);
+            --color-text: var(--color-slate-900);
+            --color-text-secondary: var(--color-slate-500);
+            --color-primary: var(--color-teal-500);
+            --color-primary-hover: var(--color-teal-600);
+            --color-primary-active: var(--color-teal-700);
+            --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+            --color-btn-primary-text: var(--color-cream-50);
+            --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+            
+            --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --space-8: 8px;
+            --space-12: 12px;
+            --space-16: 16px;
+            --space-24: 24px;
+            --space-32: 32px;
+            --radius-base: 8px;
+            --radius-lg: 12px;
+            --duration-normal: 250ms;
+            --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-background: var(--color-charcoal-700);
+                --color-surface: var(--color-charcoal-800);
+                --color-text: var(--color-gray-200);
+                --color-text-secondary: rgba(var(--color-gray-300), 0.7);
+                --color-primary: var(--color-teal-300);
+                --color-border: rgba(var(--color-gray-400-rgb), 0.3);
+                --color-btn-primary-text: var(--color-slate-900);
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family-base);
+            background: var(--color-background);
+            color: var(--color-text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-24);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 80px;
+            margin-bottom: var(--space-24);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: 600;
+            margin-bottom: var(--space-16);
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-32);
+            line-height: 1.7;
+        }
+
+        .card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-32);
+            margin-top: var(--space-32);
+            text-align: left;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+        }
+
+        .card h2 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: var(--space-8);
+        }
+
+        .card p {
+            color: var(--color-text-secondary);
+            font-size: 14px;
+            margin-bottom: var(--space-24);
+        }
+
+        .form-group {
+            margin-bottom: var(--space-16);
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            font-size: 14px;
+            margin-bottom: var(--space-8);
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: var(--space-12);
+            font-size: 14px;
+            font-family: var(--font-family-base);
+            background: var(--color-background);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            color: var(--color-text);
+            transition: all var(--duration-normal) var(--ease-standard);
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px var(--color-focus-ring);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            padding: var(--space-12) var(--space-24);
+            font-size: 16px;
+            font-weight: 500;
+            background: var(--color-primary);
+            color: var(--color-btn-primary-text);
+            border: none;
+            border-radius: var(--radius-base);
+            cursor: pointer;
+            transition: all var(--duration-normal) var(--ease-standard);
+        }
+
+        button:hover {
+            background: var(--color-primary-hover);
+            transform: translateY(-1px);
+        }
+
+        button:active {
+            background: var(--color-primary-active);
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .success-message {
+            display: none;
+            padding: var(--space-16);
+            background: rgba(var(--color-success-rgb), 0.15);
+            border: 1px solid rgba(var(--color-success-rgb), 0.25);
+            border-radius: var(--radius-base);
+            color: var(--color-primary);
+            font-weight: 500;
+            margin-top: var(--space-16);
+        }
+
+        .success-message.show {
+            display: block;
+            animation: slideIn 0.3s var(--ease-standard);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .error-message {
+            display: none;
+            padding: var(--space-16);
+            background: rgba(192, 21, 47, 0.15);
+            border: 1px solid rgba(192, 21, 47, 0.25);
+            border-radius: var(--radius-base);
+            color: #c0152f;
+            font-weight: 500;
+            margin-top: var(--space-16);
+        }
+
+        .error-message.show {
+            display: block;
+            animation: slideIn 0.3s var(--ease-standard);
+        }
+
+        @media (max-width: 640px) {
+            .logo {
+                font-size: 60px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .subtitle {
+                font-size: 16px;
+            }
+
+            .card {
+                padding: var(--space-24);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🚧</div>
+        <h1>We're Building Something Big</h1>
+        <p class="subtitle">
+            Our site is temporarily down for maintenance as we work on exciting new features. 
+            But don't worry – we're still here to help!
+        </p>
+
+        <div class="card">
+            <h2>Need Something?</h2>
+            <p>We can still fulfill your orders! Just send us a message below and we'll get back to you as soon as possible.</p>
+            
+            <form id="requestForm">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required placeholder="John Doe">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required placeholder="you@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Your Request</label>
+                    <textarea id="message" name="message" required placeholder="Tell us what you need..."></textarea>
+                </div>
+
+                <button type="submit" id="submitBtn">Send Request</button>
+            </form>
+
+            <div class="success-message" id="successMessage">
+                ✓ Thanks! We've received your request and will get back to you soon.
+            </div>
+
+            <div class="error-message" id="errorMessage">
+                ✗ Oops! Something went wrong. Please try again or email us directly.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('requestForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value
+            };
+
+            // Disable button during submission
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            
+            // Hide previous messages
+            successMessage.classList.remove('show');
+            errorMessage.classList.remove('show');
+
+            try {
+                // Using Shopify's contact form endpoint
+                const response = await fetch('/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({
+                        'contact[name]': formData.name,
+                        'contact[email]': formData.email,
+                        'contact[body]': formData.message,
+                        'form_type': 'contact'
+                    })
+                });
+
+                if (response.ok || response.redirected) {
+                    // Show success message
+                    successMessage.classList.add('show');
+                    form.reset();
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                errorMessage.classList.add('show');
+                console.error('Submission error:', error);
+            } finally {Updated the form to work with Shopify's native contact form endpoint. The form now submits to `/contact` using Shopify's expected format, which will send emails to the store owner's email address configured in Shopify settings.
+
+---
+
+
+1. Go to **Shopify Admin → Online Store → Preferences**
+2. Scroll to **Password protection**
+3. Enable password protection
+4. Click **"Edit Password page"** in your theme editor
+5. Replace the content with this HTML
+6. Save and your store will show this page to visitors (while you can still access with password)
+
+1. Go to **Shopify Admin → Online Store → Themes**
+2. Click **"Actions" → "Edit code"**
+3. Create a new template: `templates/page.maintenance.liquid`
+4. Paste this HTML code
+5. Create a new page and assign it the "maintenance" template
+6. Use an app like "Redirect Manager" to redirect all traffic to this page
+
+Install one of these Shopify apps for easier management:
+- **"Under Construction & Coming Soon"** by Hextom
+- **"Maintenance Mode"** by Powr.io
+- They let you upload custom HTML/CSS easily
+
+The form now submits to Shopify's built-in contact form handler (`/contact`). Emails will be sent to the email address configured in:
+**Shopify Admin → Settings → Store details → Store contact email**
+                // Re-enable button
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Request';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+{% liquid
+  assign animation_effect = settings.animations
+  assign animated = false
+  if animation_effect != 'none'
+    assign animated = true
+  endif
+%}
+
+<!-- 🔹 Page Header Section -->
+<div class="container mx-auto px-4">
+  <div class="bg-white shadow-md rounded-lg p-6 text-center">
+    
+    <!-- ✅ Main Page H1 -->
+    <h1 class="text-4xl font-bold text-gray-900">
+      {% if section.settings.custom_h1 != blank %}
+        {{ section.settings.custom_h1 }}
+      {% else %}
+        {{ page.title }}
+      {% endif %}
+    </h1>
+
+    <!-- ✅ Subheading (H3) if available -->
+    {% if page.metafields.custom.subheading != blank %}
+      <h3 class="text-xl text-gray-600 mt-2">
+        {{ page.metafields.custom.subheading }}
+      </h3>
+    {% endif %}
+
+  </div>
+</div>
+
+<!-- 🔹 Page Content -->
+{% if page.content != blank %}
+  <div class="container mx-auto px-4 mt-6">
+    <div class="bg-white shadow-md rounded-lg p-6">
+      <div class="page-content rte leading-relaxed">
+        {{ page.content }}
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Main Page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "custom_h1",
+      "label": "Custom Page H1",
+      "default": "Default Page Title"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_title",
+      "label": "Show Page Title",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Main Page"
+    }
+  ]
+}
+{% endschema %}
